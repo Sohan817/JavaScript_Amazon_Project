@@ -71,6 +71,12 @@ document
           quantity: 1,
         });
       }
-      console.log(cart);
+
+      let totalCartQuantity = 0;
+      cart.forEach((quantity) => {
+        totalCartQuantity = totalCartQuantity + quantity.quantity;
+      });
+
+      document.querySelector(".js-cart-quantity").innerHTML = totalCartQuantity;
     });
   });
