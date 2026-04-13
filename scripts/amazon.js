@@ -1,30 +1,30 @@
 let productHtml = "";
 
-products.forEach((prduct) => {
+products.forEach((product) => {
   productHtml += `<div class="product-container">
           <div class="product-image-container">
             <img
               class="product-image"
-              src="${prduct.image}"
+              src="${product.image}"
             />
           </div>
 
           <div class="product-name limit-text-to-2-lines">
-            ${prduct.name}
+            ${product.name}
           </div>
 
           <div class="product-rating-container">
             <img
               class="product-rating-stars"
-              src="images/ratings/rating-${prduct.rating.stars * 10}.png"
+              src="images/ratings/rating-${product.rating.stars * 10}.png"
             />
-            <div class="product-rating-count link-primary">${prduct.rating.count}</div>
+            <div class="product-rating-count link-primary">${product.rating.count}</div>
           </div>
 
-          <div class="product-price">$${(prduct.priceCents / 100).toFixed(2)}</div>
+          <div class="product-price">$${(product.priceCents / 100).toFixed(2)}</div>
 
           <div class="product-quantity-container">
-            <select>
+            <select class ="js-product-quantity-${product.id}">
               <option selected value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -45,7 +45,7 @@ products.forEach((prduct) => {
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id = "${prduct.id}">Add to Cart</button>
+          <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id = "${product.id}">Add to Cart</button>
         </div>`;
 });
 
@@ -62,15 +62,14 @@ document
           matchingItem = item;
         }
       });
+      let prductQuantity = document.querySelector(
+        `.js-product-quantity-${productId}`,
+      );
 
-      if (matchingItem) {
-        matchingItem.quantity++;
-      } else {
-        cart.push({
-          productId: productId,
-          quantity: 1,
-        });
-      }
+      cart.push({
+        productId: productId,
+        quantity: Number(prductQuantity.value),
+      });
 
       let totalCartQuantity = 0;
       cart.forEach((quantity) => {
