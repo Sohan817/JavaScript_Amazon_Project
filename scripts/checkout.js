@@ -12,7 +12,7 @@ cart.forEach((cartItem) => {
       matchingProduct = product;
     }
   });
-  cartSummarHtml += `<div class="cart-item-container">
+  cartSummarHtml += `<div class="cart-item-container js-delete-container-${matchingProduct.id}">
                 <div class="delivery-date">Delivery date: Tuesday, June 21</div>
 
                 <div class="cart-item-details-grid">
@@ -87,6 +87,9 @@ document.querySelectorAll(".js-delete-from-cart").forEach((deleteCartItem) => {
   deleteCartItem.addEventListener("click", () => {
     const cartProductId = deleteCartItem.dataset.productId;
     removeItemFromCart(cartProductId);
-    console.log(cart);
+    const deleteItem = document.querySelector(
+      `.js-delete-container-${cartProductId}`,
+    );
+    deleteItem.remove();
   });
 });
