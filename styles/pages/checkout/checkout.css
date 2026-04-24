@@ -209,3 +209,20 @@
   margin-top: 11px;
   margin-bottom: 15px;
 }
+.input-item-quantity {
+  width: 25px;
+  display: none;
+}
+.save-item-quantity {
+  display: none;
+}
+.input-item-quantity-visible {
+  width: 25px;
+  display: initial;
+}
+.save-item-quantity-visible {
+  display: contents;
+}
+.update-quantity-link-invisible {
+  display: none;
+}
