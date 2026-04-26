@@ -22,6 +22,7 @@ export function addToCart(productId) {
     // quantity: Quantity,
     productId,
     Quantity,
+    delivaryOptionsId: "1",
   });
   saveToLocalStorage();
 }

@@ -6,6 +6,8 @@ import {
 } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { foratCurrency } from "./utils/money.js";
+import { delivaryOptions } from "../data/delivaryOptions.js";
+import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 
 let cartSummarHtml = "";
 
@@ -17,8 +19,20 @@ cart.forEach((cartItem) => {
       matchingProduct = product;
     }
   });
+
+  const delivaryOptionId = cartItem.delivaryOptionsId;
+  let delivaryOption;
+  delivaryOptions.forEach((delivary) => {
+    if (delivary.id === delivaryOptionId) {
+      delivaryOption = delivary;
+    }
+  });
+  const todaysDate = dayjs();
+  const delivaryDate = todaysDate.add(delivaryOption.delivaryDays, "days");
+  const dateString = delivaryDate.format("dddd, MMMM D");
+
   cartSummarHtml += `<div class="cart-item-container js-delete-container-${matchingProduct.id}">
-                <div class="delivery-date">Delivery date: Tuesday, June 21</div>
+                <div class="delivery-date">Delivery date: ${dateString} </div>
 
                 <div class="cart-item-details-grid">
                 <img
@@ -50,44 +64,38 @@ cart.forEach((cartItem) => {
                     <div class="delivery-options-title">
                     Choose a delivery option:
                     </div>
-                    <div class="delivery-option">
-                    <input
-                        type="radio"
-                        checked
-                        class="delivery-option-input"
-                        name="delivery-option-${matchingProduct.id}"
-                    />
-                    <div>
-                        <div class="delivery-option-date">Tuesday, June 21</div>
-                        <div class="delivery-option-price">FREE Shipping</div>
-                    </div>
-                    </div>
-                    <div class="delivery-option">
-                    <input
-                        type="radio"
-                        class="delivery-option-input"
-                        name="delivery-option-${matchingProduct.id}"
-                    />
-                    <div>
-                        <div class="delivery-option-date">Wednesday, June 15</div>
-                        <div class="delivery-option-price">$4.99 - Shipping</div>
-                    </div>
-                    </div>
-                    <div class="delivery-option">
-                    <input
-                        type="radio"
-                        class="delivery-option-input"
-                        name="delivery-option-${matchingProduct.id}"
-                    />
-                    <div>
-                        <div class="delivery-option-date">Monday, June 13</div>
-                        <div class="delivery-option-price">$9.99 - Shipping</div>
-                    </div>
-                    </div>
+                    ${delivaryOptionHTML(matchingProduct, cartItem)}
                 </div>
                 </div>
             </div>`;
 });
+
+function delivaryOptionHTML(matchingProduct, cartItem) {
+  let delivaryHTML = "";
+  delivaryOptions.forEach((delivaryOption) => {
+    const todaysDate = dayjs();
+    const delivaryDate = todaysDate.add(delivaryOption.delivaryDays, "days");
+    const dateString = delivaryDate.format("dddd, MMMM D");
+    const delivaryPrice =
+      delivaryOption.delivaryPrice === 0
+        ? "Free"
+        : `$${foratCurrency(delivaryOption.delivaryPrice)}-`;
+    const isChecked = delivaryOption.id === cartItem.delivaryOptionsId;
+    delivaryHTML += `<div class="delivery-option">
+      <input
+      type="radio"
+      ${isChecked ? "checked" : ""}
+      class="delivery-option-input"
+      name="delivery-option-${matchingProduct.id}"
+      />
+       <div>
+       <div class="delivery-option-date">${dateString}</div>
+       <div class="delivery-option-price">${delivaryPrice} Shipping</div>
+    </div>
+    </div>`;
+  });
+  return delivaryHTML;
+}
 
 document.querySelector(".js-order-summary").innerHTML = cartSummarHtml;
 document.querySelector(".js-cart-item-count").innerHTML =
