@@ -82,17 +82,17 @@ function delivaryOptionHTML(matchingProduct, cartItem) {
         : `$${foratCurrency(delivaryOption.delivaryPrice)}-`;
     const isChecked = delivaryOption.id === cartItem.delivaryOptionsId;
     delivaryHTML += `<div class="delivery-option">
-      <input
-      type="radio"
-      ${isChecked ? "checked" : ""}
-      class="delivery-option-input"
-      name="delivery-option-${matchingProduct.id}"
-      />
-       <div>
-       <div class="delivery-option-date">${dateString}</div>
-       <div class="delivery-option-price">${delivaryPrice} Shipping</div>
-    </div>
-    </div>`;
+    <input
+    type="radio"
+    ${isChecked ? "checked" : ""}
+    class="delivery-option-input"
+    name="delivery-option-${matchingProduct.id}"
+    />
+      <div>
+      <div class="delivery-option-date">${dateString}</div>
+      <div class="delivery-option-price">${delivaryPrice} Shipping</div>
+  </div>
+  </div>`;
   });
   return delivaryHTML;
 }
