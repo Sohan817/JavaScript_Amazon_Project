@@ -12,6 +12,7 @@ import {
   getDeliveryOption,
 } from "../../data/delivaryOptions.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
+import { renderProductSummary } from "./paymentSummary.js";
 
 export function renderCheckoutPage() {
   let cartSummarHtml = "";
@@ -109,7 +110,7 @@ export function renderCheckoutPage() {
           `.js-delete-container-${cartProductId}`,
         );
         deleteItem.remove();
-        location.reload();
+        renderProductSummary();
       });
     });
 
@@ -159,7 +160,8 @@ export function renderCheckoutPage() {
         );
         updateCheckOutPageQuantity(productId, checkOutItemQuantity);
         updateCheckOutQuantityReverse(productId);
-        location.reload();
+        renderCheckoutPage();
+        renderProductSummary();
       });
     });
 
@@ -170,7 +172,8 @@ export function renderCheckoutPage() {
         );
         updateCheckOutPageQuantity(productId, checkOutItemQuantity);
         updateCheckOutQuantityReverse(productId);
-        location.reload();
+        renderCheckoutPage();
+        renderProductSummary();
       }
     });
   }
@@ -182,6 +185,7 @@ export function renderCheckoutPage() {
       const delivaryOptionId = delivaryOption.dataset.delivaryOptionId;
       selectDelevaryOption(productId, delivaryOptionId);
       renderCheckoutPage();
+      renderProductSummary();
     });
   });
 }
