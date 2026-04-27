@@ -5,9 +5,12 @@ import {
   updateCheckOutPageQuantity,
   selectDelevaryOption,
 } from "../../data/cart.js";
-import { products } from "../../data/products.js";
+import { products, getProduct } from "../../data/products.js";
 import { foratCurrency } from "../utils/money.js";
-import { delivaryOptions } from "../../data/delivaryOptions.js";
+import {
+  delivaryOptions,
+  getDeliveryOption,
+} from "../../data/delivaryOptions.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 
 export function renderCheckoutPage() {
@@ -15,20 +18,11 @@ export function renderCheckoutPage() {
 
   cart.forEach((cartItem) => {
     let productId = cartItem.productId;
-    let matchingProduct;
-    products.forEach((product) => {
-      if (product.id === productId) {
-        matchingProduct = product;
-      }
-    });
+    let matchingProduct = getProduct(productId);
 
     const delivaryOptionId = cartItem.delivaryOptionsId;
-    let delivaryOption;
-    delivaryOptions.forEach((delivary) => {
-      if (delivary.id === delivaryOptionId) {
-        delivaryOption = delivary;
-      }
-    });
+    let delivaryOption = getDeliveryOption(delivaryOptionId);
+
     const todaysDate = dayjs();
     const delivaryDate = todaysDate.add(delivaryOption.delivaryDays, "days");
     const dateString = delivaryDate.format("dddd, MMMM D");
