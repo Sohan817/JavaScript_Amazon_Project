@@ -3,6 +3,7 @@ import {
   removeItemFromCart,
   totalCartItem,
   updateCheckOutPageQuantity,
+  selectDelevaryOption,
 } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { foratCurrency } from "./utils/money.js";
@@ -81,7 +82,9 @@ function delivaryOptionHTML(matchingProduct, cartItem) {
         ? "Free"
         : `$${foratCurrency(delivaryOption.delivaryPrice)}-`;
     const isChecked = delivaryOption.id === cartItem.delivaryOptionsId;
-    delivaryHTML += `<div class="delivery-option">
+    delivaryHTML += `<div class="delivery-option js-delivary-option"
+    data-product-id = "${matchingProduct.id}"
+    data-delivary-option-id = "${delivaryOption.id}">
     <input
     type="radio"
     ${isChecked ? "checked" : ""}
@@ -174,3 +177,12 @@ function updateCheckoutIteamQuantity(productId) {
     }
   });
 }
+
+//Select delivary option
+document.querySelectorAll(".js-delivary-option").forEach((delivaryOption) => {
+  delivaryOption.addEventListener("click", () => {
+    const productId = delivaryOption.dataset.productId;
+    const delivaryOptionId = delivaryOption.dataset.delivaryOptionId;
+    selectDelevaryOption(productId, delivaryOptionId);
+  });
+});

@@ -59,3 +59,14 @@ export function updateCheckOutPageQuantity(productId, newQuantity) {
   });
   saveToLocalStorage();
 }
+
+export function selectDelevaryOption(productId, delivaryOptionsId) {
+  let matchingItem;
+  cart.forEach((cartItem) => {
+    if (cartItem.productId === productId) {
+      matchingItem = cartItem;
+    }
+  });
+  matchingItem.delivaryOptionsId = delivaryOptionsId;
+  saveToLocalStorage();
+}
