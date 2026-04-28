@@ -10,9 +10,11 @@ import { foratCurrency } from "../utils/money.js";
 import {
   delivaryOptions,
   getDeliveryOption,
+  getDeliveryDay,
 } from "../../data/delivaryOptions.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 import { renderProductSummary } from "./paymentSummary.js";
+import { totalCartItemInCheckout } from "./checkoutHeader.js";
 
 export function renderCheckoutPage() {
   let cartSummarHtml = "";
@@ -23,6 +25,8 @@ export function renderCheckoutPage() {
 
     const delivaryOptionId = cartItem.delivaryOptionsId;
     let delivaryOption = getDeliveryOption(delivaryOptionId);
+
+    getDeliveryDay(delivaryOptionId);
 
     const todaysDate = dayjs();
     const delivaryDate = todaysDate.add(delivaryOption.delivaryDays, "days");
@@ -68,8 +72,10 @@ export function renderCheckoutPage() {
   });
 
   function delivaryOptionHTML(matchingProduct, cartItem) {
+    const delivaryOptionId = cartItem.delivaryOptionsId;
     let delivaryHTML = "";
     delivaryOptions.forEach((delivaryOption) => {
+      getDeliveryDay(delivaryOptionId);
       const todaysDate = dayjs();
       const delivaryDate = todaysDate.add(delivaryOption.delivaryDays, "days");
       const dateString = delivaryDate.format("dddd, MMMM D");
@@ -97,9 +103,8 @@ export function renderCheckoutPage() {
   }
 
   document.querySelector(".js-order-summary").innerHTML = cartSummarHtml;
-  document.querySelector(".js-cart-item-count").innerHTML =
-    `${totalCartItem()} Times`;
 
+  totalCartItemInCheckout();
   document
     .querySelectorAll(".js-delete-from-cart")
     .forEach((deleteCartItem) => {
@@ -111,6 +116,7 @@ export function renderCheckoutPage() {
         );
         deleteItem.remove();
         renderProductSummary();
+        totalCartItemInCheckout();
       });
     });
 
