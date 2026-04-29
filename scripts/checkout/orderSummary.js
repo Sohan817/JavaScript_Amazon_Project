@@ -40,7 +40,6 @@ export function renderCheckoutPage() {
                     class="product-image"
                     src="${matchingProduct.image}"
                 />
-
                 <div class="cart-item-details">
                     <div class="product-name">
                     ${matchingProduct.name}
