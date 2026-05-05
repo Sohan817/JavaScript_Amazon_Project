@@ -14,9 +14,17 @@ export function addToCart(productId) {
       matchingItem = cartItem;
     }
   });
-  let Quantity = Number(
-    document.querySelector(`.js-product-quantity-${productId}`).value,
+
+  const quantityEl = document.querySelector(
+    `.js-product-quantity-${productId}`,
   );
+
+  if (!quantityEl) {
+    console.error(`❌ Quantity input not found for productId: ${productId}`);
+    return;
+  }
+  let Quantity = Number(quantityEl.value);
+
   cart.push({
     // productId: productId,
     // quantity: Quantity,

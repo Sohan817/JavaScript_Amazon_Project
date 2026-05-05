@@ -1,4 +1,4 @@
-import { foratCurrency } from "../scripts/utils/money.js";
+import { foratCurrency } from "../../scripts/utils/money.js";
 
 describe("Test Suit: foratCurrency", () => {
   it("Convert Cents into doller", () => {
