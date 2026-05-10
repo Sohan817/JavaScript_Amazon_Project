@@ -7,7 +7,13 @@ describe("Test Suit: foratCurrency", () => {
   it("Work with 0", () => {
     expect(foratCurrency(0)).toEqual("0.00");
   });
-  it("Round to the closest cents", () => {
+  it("Round up closest cents", () => {
     expect(foratCurrency(2095.5)).toEqual("20.96");
+  });
+  it("Round down closest cents", () => {
+    expect(foratCurrency(2095.4)).toEqual("20.95");
+  });
+  it("Round down closest cents", () => {
+    expect(foratCurrency(-2095.4)).toEqual("-20.95");
   });
 });

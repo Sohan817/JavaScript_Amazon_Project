@@ -1,7 +1,18 @@
-export let cart = JSON.parse(localStorage.getItem("cart"));
+// export let cart = JSON.parse(localStorage.getItem("cart"));
 
-if (!cart) {
-  cart = [];
+// if (!cart) {
+//   cart = [];
+// }
+
+export let cart;
+
+loadStorage();
+export function loadStorage() {
+  cart = JSON.parse(localStorage.getItem("cart"));
+
+  if (!cart) {
+    cart = [];
+  }
 }
 
 function saveToLocalStorage() {
@@ -14,14 +25,10 @@ export function addToCart(productId) {
       matchingItem = cartItem;
     }
   });
-
-  const quantityEl = document.querySelector(
-    `.js-product-quantity-${productId}`,
-  );
+  let quantityEl = document.querySelector(`.js-product-quantity-${productId}`);
 
   if (!quantityEl) {
-    console.error(`❌ Quantity input not found for productId: ${productId}`);
-    return;
+    quantityEl = 0;
   }
   let Quantity = Number(quantityEl.value);
 

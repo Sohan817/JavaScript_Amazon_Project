@@ -49,5 +49,8 @@ export function renderProductSummary() {
         Place your order
         </button>
   `;
-  document.querySelector(".js-payment-summary").innerHTML = paymentSummaryHTML;
+  const paymentSum = document.querySelector(".js-payment-summary");
+  if (paymentSum) {
+    paymentSum.innerHTML = paymentSummaryHTML;
+  }
 }

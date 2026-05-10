@@ -45,7 +45,7 @@ export function renderCheckoutPage() {
                     ${matchingProduct.name}
                     </div>
                     <div class="product-price">$${foratCurrency(matchingProduct.priceCents)}</div>
-                    <div class="product-quantity">
+                    <div class="product-quantity js-product-quantity-${matchingProduct.id}">
                     <span> Quantity: <span class="quantity-label">${cartItem.Quantity}</span> </span>
                     <span class="update-quantity-link-${matchingProduct.id} link-primary js-update-from-checkout"
                     data-product-id = "${matchingProduct.id}">
@@ -53,7 +53,9 @@ export function renderCheckoutPage() {
                     </span>
                     <input class ="input-item-quantity-${matchingProduct.id} input-item-quantity">
                     <span class="save-item-quantity-${matchingProduct.id} link-primary save-item-quantity">Save</span>
-                    <span class="delete-quantity-link link-primary js-delete-from-cart" 
+                    <span class="delete-quantity-link link-primary 
+                    js-delete-from-cart 
+                    js-delete-link-${matchingProduct.id}"
                     data-product-id = "${matchingProduct.id}">
                         Delete
                     </span>
@@ -101,7 +103,13 @@ export function renderCheckoutPage() {
     return delivaryHTML;
   }
 
-  document.querySelector(".js-order-summary").innerHTML = cartSummarHtml;
+  const orderSummaryElement = document.querySelector(".js-order-summary");
+
+  if (orderSummaryElement) {
+    orderSummaryElement.innerHTML = cartSummarHtml;
+  }
+
+  //document.querySelector(".js-order-summary").innerHTML = cartSummarHtml;
 
   totalCartItemInCheckout();
   document

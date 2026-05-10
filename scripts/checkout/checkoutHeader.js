@@ -1,6 +1,9 @@
 import { totalCartItem } from "../../data/cart.js";
 
 export function totalCartItemInCheckout() {
-  document.querySelector(".js-cart-item-count").innerHTML =
-    `${totalCartItem()} Times`;
+  const cartItemCount = document.querySelector(".js-cart-item-count");
+
+  if (cartItemCount) {
+    cartItemCount.innerHTML = `${totalCartItem()} Times`;
+  }
 }

@@ -1,4 +1,4 @@
-import { foratCurrency } from "../scripts/utils/money.js";
+import { foratCurrency } from "../../scripts/utils/money.js";
 
 console.log("Test Suit: foratCurrency");
 

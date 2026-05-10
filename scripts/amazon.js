@@ -53,7 +53,10 @@ products.forEach((product) => {
         </div>`;
 });
 
-document.querySelector(".js-product-grid").innerHTML = productHtml;
+const productDocument = document.querySelector(".js-product-grid");
+if (productDocument) {
+  productDocument.innerHTML = productHtml;
+}
 
 export function updateCart() {
   document.querySelector(".js-cart-quantity").innerHTML = `${totalCartItem()}`;
