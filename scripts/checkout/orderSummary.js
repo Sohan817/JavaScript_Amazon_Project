@@ -41,10 +41,10 @@ export function renderCheckoutPage() {
                     src="${matchingProduct.image}"
                 />
                 <div class="cart-item-details">
-                    <div class="product-name">
+                    <div class="product-name js-product-name-${matchingProduct.id}">
                     ${matchingProduct.name}
                     </div>
-                    <div class="product-price">$${foratCurrency(matchingProduct.priceCents)}</div>
+                    <div class="product-price js-price-summary-${matchingProduct.id}">$${foratCurrency(matchingProduct.priceCents)}</div>
                     <div class="product-quantity js-product-quantity-${matchingProduct.id}">
                     <span> Quantity: <span class="quantity-label">${cartItem.Quantity}</span> </span>
                     <span class="update-quantity-link-${matchingProduct.id} link-primary js-update-from-checkout"
