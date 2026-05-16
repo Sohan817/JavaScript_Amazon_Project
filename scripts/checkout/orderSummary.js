@@ -91,7 +91,7 @@ export function renderCheckoutPage() {
     <input
     type="radio"
     ${isChecked ? "checked" : ""}
-    class="delivery-option-input"
+    class="delivery-option-input js-delivery-option-productId-${matchingProduct.id}-deliveryOptionId-${delivaryOption.id}"
     name="delivery-option-${matchingProduct.id}"
     />
       <div>

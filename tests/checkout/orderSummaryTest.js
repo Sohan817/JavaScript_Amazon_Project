@@ -62,4 +62,27 @@ describe("Test suit for: renderCheckoutPage()", () => {
     expect(cart.length).toEqual(1);
     expect(cart[0].productId).toEqual(productId2);
   });
+
+  //Test for delivery option
+
+  it("Update delivery option", () => {
+    document
+      .querySelector(
+        `.js-delivery-option-productId-${productId1}-deliveryOptionId-${3}`,
+      )
+      .click();
+    expect(
+      document.querySelector(
+        `.js-delivery-option-productId-${productId1}-deliveryOptionId-${3}`,
+      ).checked,
+    ).toEqual(true);
+    expect(cart.length).toEqual(2);
+    expect(cart[0].delivaryOptionsId).toEqual("3");
+    expect(
+      document.querySelector(".js-payment-summary-shipping").innerText,
+    ).toEqual("$9.99");
+    expect(
+      document.querySelector(".js-payment-summary-orderTotal").innerText,
+    ).toEqual("$40.67");
+  });
 });

@@ -22,12 +22,12 @@ export function renderProductSummary() {
 
         <div class="payment-summary-row">
         <div>Items (${cartItemCount}):</div>
-        <div class="payment-summary-money">$${foratCurrency(productPriceCents)}</div>
+        <div class="payment-summary-money js-s">$${foratCurrency(productPriceCents)}</div>
         </div>
 
         <div class="payment-summary-row">
         <div>Shipping &amp; handling:</div>
-        <div class="payment-summary-money">$${foratCurrency(deliveryCost)}</div>
+        <div class="payment-summary-money js-payment-summary-shipping">$${foratCurrency(deliveryCost)}</div>
         </div>
 
         <div class="payment-summary-row subtotal-row">
@@ -42,7 +42,7 @@ export function renderProductSummary() {
 
         <div class="payment-summary-row total-row">
         <div>Order total:</div>
-        <div class="payment-summary-money">$${foratCurrency(OrderTotal)}</div>
+        <div class="payment-summary-money js-payment-summary-orderTotal">$${foratCurrency(OrderTotal)}</div>
         </div>
 
         <button class="place-order-button button-primary">
