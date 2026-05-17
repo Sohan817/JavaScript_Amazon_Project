@@ -41,3 +41,13 @@ export function getDeliveryDay(delivaryOptionId) {
   }
   return delivaryOption.delivaryDays;
 }
+
+export function validDeliveryOptionId(delivaryOptionId) {
+  let found = false;
+  delivaryOptions.forEach((delivary) => {
+    if (delivary.id === delivaryOptionId) {
+      found = true;
+    }
+  });
+  return found;
+}

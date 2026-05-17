@@ -3,7 +3,7 @@
 // if (!cart) {
 //   cart = [];
 // }
-
+import { validDeliveryOptionId } from "../data/delivaryOptions.js";
 export let cart;
 
 loadStorage();
@@ -82,6 +82,10 @@ export function selectDelevaryOption(productId, delivaryOptionsId) {
       matchingItem = cartItem;
     }
   });
+  if (!matchingItem || !validDeliveryOptionId(delivaryOptionsId)) {
+    return;
+  }
+
   matchingItem.delivaryOptionsId = delivaryOptionsId;
   saveToLocalStorage();
 }
