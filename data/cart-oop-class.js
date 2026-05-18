@@ -1,22 +1,25 @@
 class Cart {
+  //public propeerty
   cartitems = undefined;
 
-  localStorageKey = undefined;
+  //private property
+  #localStorageKey = undefined;
 
   constructor(localStorageKey) {
-    this.localStorageKey = localStorageKey;
-    this.loadStorage();
+    this.#localStorageKey = localStorageKey;
+    this.#loadStorage();
   }
 
-  loadStorage() {
-    this.cartitems = JSON.parse(localStorage.getItem(this.localStorageKey));
+  //private method
+  #loadStorage() {
+    this.cartitems = JSON.parse(localStorage.getItem(this.#localStorageKey));
     if (!this.cartitems) {
       this.cartitems = [];
     }
   }
 
   saveToLocalStorage() {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartitems));
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartitems));
   }
 
   addToCart(productId) {
