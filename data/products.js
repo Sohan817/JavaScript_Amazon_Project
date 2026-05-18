@@ -1,3 +1,5 @@
+import { foratCurrency } from "../scripts/utils/money.js";
+
 export function getProduct(productId) {
   let matchingProduct;
   products.forEach((product) => {
@@ -6,6 +8,32 @@ export function getProduct(productId) {
     }
   });
   return matchingProduct;
+}
+
+class Product {
+  id;
+  image;
+  name;
+  rating;
+  priceCents;
+  keywords;
+
+  constructor(prodctDetails) {
+    this.id = prodctDetails.id;
+    this.image = prodctDetails.image;
+    this.name = prodctDetails.name;
+    this.rating = prodctDetails.rating;
+    this.priceCents = prodctDetails.priceCents;
+    this.keywords = prodctDetails.keywords;
+  }
+
+  getRatings() {
+    return `images/ratings/rating-${this.rating.stars * 10}.png`;
+  }
+
+  getPrice() {
+    return `$${foratCurrency(this.priceCents)}`;
+  }
 }
 
 export const products = [
@@ -479,4 +507,6 @@ export const products = [
     priceCents: 2400,
     keywords: ["sweaters", "hoodies", "apparel", "mens"],
   },
-];
+].map((prodctDetails) => {
+  return new Product(prodctDetails);
+});
