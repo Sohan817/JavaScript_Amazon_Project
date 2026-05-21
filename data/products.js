@@ -52,6 +52,21 @@ class Clothing extends Product {
   }
 }
 
+class Appliance extends Product {
+  instructionsLink;
+  warrantyLink;
+  constructor(prodctDetails) {
+    super(prodctDetails);
+    this.instructionsLink = prodctDetails.instructionsLink;
+    this.warrantyLink = prodctDetails.warrantyLink;
+  }
+  extraInfoHTML() {
+    return `<a href = "${this.instructionsLink}" target = "_blank">Instructions</a>
+    <a href = "${this.warrantyLink}" target = "_blank">Warranty</a>
+    `;
+  }
+}
+
 // const currentDate = new Date();
 // console.log(currentDate);
 // console.log(currentDate.toLocaleTimeString());
@@ -122,6 +137,9 @@ export const products = [
       count: 2197,
     },
     priceCents: 1899,
+    type: "appliances",
+    instructionsLink: "images/appliance-instructions.png",
+    warrantyLink: "images/appliance-warranty.png",
     keywords: ["toaster", "kitchen", "appliances"],
   },
   {
@@ -255,6 +273,9 @@ export const products = [
       stars: 5,
       count: 846,
     },
+    type: "appliances",
+    instructionsLink: "images/appliance-instructions.png",
+    warrantyLink: "images/appliance-warranty.png",
     priceCents: 3074,
     keywords: ["water boiler", "appliances", "kitchen"],
   },
@@ -469,6 +490,9 @@ export const products = [
       count: 1211,
     },
     priceCents: 2250,
+    type: "appliances",
+    instructionsLink: "images/appliance-instructions.png",
+    warrantyLink: "images/appliance-warranty.png",
     keywords: ["coffeemakers", "kitchen", "appliances"],
   },
   {
@@ -513,6 +537,9 @@ export const products = [
       count: 3,
     },
     priceCents: 10747,
+    type: "appliances",
+    instructionsLink: "images/appliance-instructions.png",
+    warrantyLink: "images/appliance-warranty.png",
     keywords: ["food blenders", "kitchen", "appliances"],
   },
   {
@@ -551,6 +578,9 @@ export const products = [
 ].map((prodctDetails) => {
   if (prodctDetails.type === "clothing") {
     return new Clothing(prodctDetails);
+  }
+  if (prodctDetails.type === "appliances") {
+    return new Appliance(prodctDetails);
   }
   return new Product(prodctDetails);
 });
