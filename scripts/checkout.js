@@ -1,6 +1,6 @@
 import { renderCheckoutPage } from "../scripts/checkout/orderSummary.js";
 import { renderProductSummary } from "../scripts/checkout/paymentSummary.js";
-import { loadProducs } from "../data/products.js";
+import { loadProducs, loadProducsFetch } from "../data/products.js";
 import { loadCart } from "../data/cart.js";
 
 //import "../../data/cart-oop.js";
@@ -10,18 +10,13 @@ import { loadCart } from "../data/cart.js";
 
 //Run Multiple Promise at a same time
 Promise.all([
-  new Promise((resolve) => {
-    loadProducs(() => {
-      resolve("Value1");
-    });
-  }),
+  loadProducsFetch(),
   new Promise((resolve) => {
     loadCart(() => {
       resolve();
     });
   }),
-]).then((Value) => {
-  console.log(Value);
+]).then(() => {
   renderCheckoutPage();
   renderProductSummary();
 });
