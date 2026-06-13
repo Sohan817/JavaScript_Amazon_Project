@@ -8,18 +8,34 @@ import { loadCart } from "../data/cart.js";
 //import "../data/car.js";
 //import "../data/backend-practisse.js";
 
-//Run Multiple Promise at a same time
-Promise.all([
-  loadProducsFetch(),
-  new Promise((resolve) => {
+//async and await
+async function loadPage() {
+  await loadProducsFetch();
+
+  await new Promise((resolve) => {
     loadCart(() => {
       resolve();
     });
-  }),
-]).then(() => {
+  });
+
   renderCheckoutPage();
   renderProductSummary();
-});
+}
+
+loadPage();
+
+//Run Multiple Promise at a same time
+// Promise.all([
+//   loadProducsFetch(),
+//   new Promise((resolve) => {
+//     loadCart(() => {
+//       resolve();
+//     });
+//   }),
+// ]).then(() => {
+//   renderCheckoutPage();
+//   renderProductSummary();
+// });
 
 //Promise
 // new Promise((resolve) => {
