@@ -10,13 +10,20 @@ import { loadCart } from "../data/cart.js";
 
 //async and await
 async function loadPage() {
-  await loadProducsFetch();
+  try {
+    //throw "error1";
+    await loadProducsFetch();
 
-  await new Promise((resolve) => {
-    loadCart(() => {
-      resolve();
+    await new Promise((resolve, reject) => {
+      //throw "error2";
+      loadCart(() => {
+        //reject();
+        resolve();
+      });
     });
-  });
+  } catch (error) {
+    console.log("Uexpected error,Please try again later");
+  }
 
   renderCheckoutPage();
   renderProductSummary();
@@ -37,7 +44,7 @@ loadPage();
 //   renderProductSummary();
 // });
 
-//Promise
+//Promise;
 // new Promise((resolve) => {
 //   loadProducs(() => {
 //     resolve("Value1");
