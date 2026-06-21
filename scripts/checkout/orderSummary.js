@@ -46,7 +46,7 @@ export function renderCheckoutPage() {
                     </div>
                     <div class="product-price js-price-summary-${matchingProduct.id}">${matchingProduct.getPrice()}</div>
                     <div class="product-quantity js-product-quantity-${matchingProduct.id}">
-                    <span> Quantity: <span class="quantity-label">${cartItem.Quantity}</span> </span>
+                    <span> Quantity: <span class="quantity-label">${cartItem.quantity}</span> </span>
                     <span class="update-quantity-link-${matchingProduct.id} link-primary js-update-from-checkout"
                     data-product-id = "${matchingProduct.id}">
                         Update

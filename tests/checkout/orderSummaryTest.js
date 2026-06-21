@@ -7,10 +7,8 @@ describe("Test suit for: renderCheckoutPage()", () => {
   const productId1 = "83d4ca15-0f35-48f5-b7a3-1ea210004f2e";
   const productId2 = "54e0eccd-8f36-462b-b68a-8182611d9add";
 
-  beforeAll((done) => {
-    loadProducsFetch().then(() => {
-      done();
-    });
+  beforeAll(async () => {
+    await loadProducsFetch();
   });
   beforeEach(() => {
     spyOn(localStorage, "setItem");

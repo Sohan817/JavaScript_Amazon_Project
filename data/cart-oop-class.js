@@ -36,13 +36,13 @@ class Cart {
     if (!quantityEl) {
       quantityEl = 0;
     }
-    let Quantity = Number(quantityEl.value);
+    let quantity = Number(quantityEl.value);
 
     this.cartitems.push({
       // productId: productId,
       // quantity: Quantity,
       productId,
-      Quantity,
+      quantity,
       delivaryOptionsId: "1",
     });
     this.saveToLocalStorage();
@@ -63,7 +63,7 @@ class Cart {
   totalCartItem() {
     let totalCartQuantity = 0;
     this.cartitems.forEach((quantity) => {
-      totalCartQuantity = totalCartQuantity + quantity.Quantity;
+      totalCartQuantity = totalCartQuantity + quantity.quantity;
     });
     return totalCartQuantity;
   }
@@ -72,9 +72,9 @@ class Cart {
     this.cartitems.forEach((quantity) => {
       if (quantity.productId === productId) {
         if (newQuantity > 0 && newQuantity <= 1000) {
-          quantity.Quantity = newQuantity;
+          quantity.quantity = newQuantity;
         } else {
-          quantity.Quantity = quantity.Quantity;
+          quantity.quantity = quantity.quantity;
         }
       }
     });

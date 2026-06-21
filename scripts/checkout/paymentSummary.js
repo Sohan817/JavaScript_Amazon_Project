@@ -10,7 +10,7 @@ export function renderProductSummary() {
   cart.forEach((cartItem) => {
     const product = getProduct(cartItem.productId);
     const deliveryOption = getDeliveryOption(cartItem.delivaryOptionsId);
-    productPriceCents += product.priceCents * cartItem.Quantity;
+    productPriceCents += product.priceCents * cartItem.quantity;
     deliveryCost += deliveryOption.delivaryPrice;
   });
   const totalBeforeTax = productPriceCents + deliveryCost;
@@ -46,7 +46,8 @@ export function renderProductSummary() {
         <div class="payment-summary-money js-payment-summary-orderTotal">$${foratCurrency(OrderTotal)}</div>
         </div>
 
-        <button class="place-order-button button-primary js-place-order">
+        <button class="place-order-button button-primary 
+        js-place-order">
         Place your order
         </button>
   `;
@@ -55,6 +56,11 @@ export function renderProductSummary() {
     paymentSum.innerHTML = paymentSummaryHTML;
   }
 
+  cart.forEach((item) => {
+    if (!item.quantity || item.quantity < 1) {
+      console.log("Invalid cart item:", item);
+    }
+  });
   //Place order
   document
     .querySelector(".js-payment-summary")
@@ -70,7 +76,6 @@ export function renderProductSummary() {
           }),
         });
         const order = await response.json();
-        console.log(order);
         saveOrder(order);
       } catch (error) {
         console.log(error);
