@@ -56,11 +56,6 @@ export function renderProductSummary() {
     paymentSum.innerHTML = paymentSummaryHTML;
   }
 
-  cart.forEach((item) => {
-    if (!item.quantity || item.quantity < 1) {
-      console.log("Invalid cart item:", item);
-    }
-  });
   //Place order
   document
     .querySelector(".js-payment-summary")

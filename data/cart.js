@@ -27,14 +27,9 @@ export function addToCart(productId) {
   });
   let quantityEl = document.querySelector(`.js-product-quantity-${productId}`);
 
-  if (!quantityEl) {
-    quantityEl = 0;
-  }
-  let quantity = Number(quantityEl.value);
+  const quantity = quantityEl ? Number(quantityEl.value) : 1;
 
   cart.push({
-    // productId: productId,
-    // quantity: Quantity,
     productId,
     quantity,
     delivaryOptionsId: "1",
