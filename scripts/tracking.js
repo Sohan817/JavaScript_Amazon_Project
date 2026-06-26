@@ -19,8 +19,9 @@ async function loadTrackingPage() {
     let arrivingdON;
     let quantity;
     let deliveryTime;
+    let currentTimeToOrderTime;
+    let deliveryTimeToOrderTime;
     let margin;
-
     order.products.forEach((productDetails) => {
       if (productDetails.productId === trackingUrlProductId) {
         arrivingdON = dayjs(productDetails.estimatedDeliveryTime).format(
@@ -33,22 +34,13 @@ async function loadTrackingPage() {
       }
     });
 
-    const date = dayjs();
-    const currentDay = date.diff(date.startOf("year"), "day") + 1;
+    const currentTime = dayjs();
     const ordeTime = dayjs(order.orderTime).format("YYYY-MM-DD");
     const ordeTimeDate = dayjs(ordeTime);
-    const ordeTimeDay =
-      ordeTimeDate.diff(ordeTimeDate.startOf("year"), "day") + 1;
     const deliveryDate = dayjs(deliveryTime);
-    const deliveryDay =
-      deliveryDate.diff(deliveryDate.startOf("year"), "day") + 1;
-    console.log(ordeTimeDay);
-    console.log(currentDay);
-    console.log(deliveryDay);
-
-    margin = (currentDay - ordeTimeDay) / (deliveryTime - ordeTimeDay);
-    console.log(margin);
-
+    currentTimeToOrderTime = ordeTimeDate.diff(currentTime, "second");
+    deliveryTimeToOrderTime = deliveryDate.diff(ordeTimeDate, "second");
+    margin = (Math.abs(currentTimeToOrderTime) / deliveryTimeToOrderTime) * 100;
     trackingHtml = `<a class="back-to-orders-link link-primary" href="orders.html">
         View all orders
     </a>
@@ -73,7 +65,7 @@ async function loadTrackingPage() {
     </div>
 
     <div class="progress-bar-container">
-    <div class="progress-bar"></div>
+    <div class="progress-bar" style= "width:${margin}%"></div>
 </div>`;
   });
 
