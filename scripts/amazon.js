@@ -5,9 +5,26 @@ import { foratCurrency } from "./utils/money.js";
 loadProducs(loadProductGrids);
 
 function loadProductGrids() {
-  let productHtml = "";
+  let searchKeywords;
+  const url = new URL(window.location.href);
+  searchKeywords = url.searchParams.get("search");
+  if (searchKeywords) {
+    searchKeywords = searchKeywords.split(" ");
+  } else {
+    searchKeywords = [];
+  }
 
-  products.forEach((product) => {
+  const productsToDisplay =
+    searchKeywords.length > 0
+      ? products.filter((product) =>
+          searchKeywords.every((keyword) =>
+            product.name.toLowerCase().includes(keyword),
+          ),
+        )
+      : products;
+
+  let productHtml = "";
+  productsToDisplay.forEach((product) => {
     productHtml += `<div class="product-container">
           <div class="product-image-container">
             <img
@@ -91,4 +108,11 @@ function loadProductGrids() {
         addMessage(productId);
       });
     });
+
+  document.querySelector(".js-search-button").addEventListener("click", () => {
+    let searchInputValue = document.querySelector(".js-search-value").value;
+    window.location.href = `amazon.html?search=${encodeURIComponent(
+      searchInputValue.toLowerCase(),
+    )}`;
+  });
 }

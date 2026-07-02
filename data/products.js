@@ -136,7 +136,6 @@ export function loadProducs(fun) {
       return new Product(prodctDetails);
     });
     fun();
-    console.log("Load Products");
   });
   //Error handling using call backs
   xhr.addEventListener("error", (error) => {
