@@ -1,6 +1,7 @@
 import { orders } from "../data/order.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 import { getProduct, loadProducsFetch } from "../data/products.js";
+import { totalCartItem } from "../data/cart.js";
 const url = new URL(window.location.href);
 const trackingUrlProductId = url.searchParams.get("productId");
 const trackingUrlOrderId = url.searchParams.get("orderId");
@@ -70,6 +71,7 @@ async function loadTrackingPage() {
   });
 
   document.querySelector(".js-order-tracking").innerHTML = trackingHtml;
+  document.querySelector(".js-cart-quantity").innerHTML = `${totalCartItem()}`;
 }
 
 loadTrackingPage();
